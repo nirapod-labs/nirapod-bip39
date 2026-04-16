@@ -1,0 +1,7 @@
+ignorePaths = [
+  "**/generated/**",
+  "**/build/**",
+  "**/node_modules/**",
+  "**/.cache/**",
+  "**/.claude/**"
+]
