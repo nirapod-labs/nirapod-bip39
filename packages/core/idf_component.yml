@@ -1,0 +1,14 @@
+version: "0.1.0"
+description: "Flash-first BIP39 English wordlist storage library for embedded targets."
+url: "https://github.com/nirapod/nirapod-bip39"
+repository: "https://github.com/nirapod/nirapod-bip39"
+license: "Apache-2.0"
+targets:
+  - esp32
+  - esp32s2
+  - esp32s3
+  - esp32c3
+  - esp32c6
+  - esp32h2
+dependencies:
+  idf: ">=5.0"
