@@ -1,0 +1,20 @@
+{
+  "name": "@nirapod/bip39-tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bun-based workspace tooling for nirapod-bip39.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "codegen": "bun src/codegen/gen_all.ts --wordlist data/english.txt --outdir ../core/generated",
+    "codegen:check": "bun run codegen && bun src/checks/check_generated.ts --generated ../core/generated",
+    "docs:doxygen": "bun src/docs/run_doxygen.ts",
+    "docs:generate": "bun run docs:doxygen",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "moxygen": "^2.1.2",
+    "typescript": "^6.0.2"
+  }
+}
