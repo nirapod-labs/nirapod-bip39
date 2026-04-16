@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "skills": {
+    "nirapod-embedded-engineering": {
+      "source": "nirapod-labs/nirapod-skills",
+      "sourceType": "github",
+      "computedHash": "27ea3b66b8cda5f41871a581ac616bc83f3ee483453281cdb9702fa28b5e2f50"
+    },
+    "write-documented-code": {
+      "source": "nirapod-labs/nirapod-skills",
+      "sourceType": "github",
+      "computedHash": "815f32c9c95b363bcc80c142c7b34ab5b5d0c8a3b4bf1759d0596e0fce28c3da"
+    },
+    "write-like-human": {
+      "source": "nirapod-labs/nirapod-skills",
+      "sourceType": "github",
+      "computedHash": "c59c404595d549a429809b4112b5078c1a6cbbd70a108e60d49e3a355a8e8f5f"
+    }
+  }
+}

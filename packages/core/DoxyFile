@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: APACHE-2.0
+# SPDX-FileCopyrightText: 2026 Nirapod Contributors
+#
+# Doxygen configuration for nirapod-bip39.
+
+PROJECT_NAME           = "nirapod-bip39"
+PROJECT_NUMBER         = "0.1.0"
+PROJECT_BRIEF          = "Flash-first BIP39 English wordlist storage for embedded targets"
+
+OUTPUT_DIRECTORY       = doxygen-docs
+CREATE_SUBDIRS         = NO
+ALLOW_UNICODE_NAMES    = NO
+
+INPUT                  = README.md include src .docs
+FILE_PATTERNS          = *.h *.c *.md
+RECURSIVE              = YES
+USE_MDFILE_AS_MAINPAGE = .docs/mainpage.md
+EXCLUDE                = build generated test bench .github
+EXAMPLE_PATH           = test
+EXAMPLE_PATTERNS       = *.c
+EXAMPLE_RECURSIVE      = YES
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_XML           = YES
+XML_OUTPUT             = xml
+GENERATE_LATEX         = NO
+HTML_COLORSTYLE        = LIGHT
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = NO
+FULL_PATH_NAMES        = YES
+STRIP_FROM_PATH        = .
+GENERATE_TAGFILE       = doxygen-docs/nirapod-bip39.tag
+TAGFILES               =
+
+OPTIMIZE_OUTPUT_FOR_C  = YES
+EXTRACT_ALL            = NO
+EXTRACT_STATIC         = YES
+WARNINGS               = YES
+WARN_AS_ERROR          = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+WARN_FORMAT            = "$file:$line: $text"
+
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+SEARCHENGINE           = YES
+USE_MATHJAX           = YES
+MATHJAX_VERSION       = MathJax_3
+MATHJAX_FORMAT        = HTML-CSS
+MATHJAX_RELPATH       = https://cdn.jsdelivr.net/npm/mathjax@3
+
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+PREDEFINED             = BIP39_FLASH_ATTR= \
+                         BIP39_IRAM_ATTR=
+
+MARKDOWN_SUPPORT       = YES
+TOC_INCLUDE_HEADINGS   = 3
+
+HAVE_DOT               = YES
+DOT_IMAGE_FORMAT       = svg
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+INCLUDE_GRAPH          = YES
+DOT_GRAPH_MAX_NODES    = 100
+MAX_DOT_GRAPH_DEPTH    = 5
+
+PLANTUML_JAR_PATH      =
+
+ALIASES                = "security=@xrefitem security \"Security Note\" \"Security Notes\" "
+ALIASES               += "hardware=@xrefitem hardware \"Hardware Constraint\" \"Hardware Constraints\" "
+ALIASES               += "timing=@xrefitem timing \"Timing Constraint\" \"Timing Constraints\" "
+ALIASES               += "flash_budget=@xrefitem flash_budget \"Flash Budget Note\" \"Flash Budget Notes\" "
+ALIASES               += "no_heap=@note No heap allocation is performed."
+ALIASES               += "phase_placeholder=@note This symbol is a reserved phase placeholder. The interface is present now so later backend work does not reshape the tree."
