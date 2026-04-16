@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: APACHE-2.0
+# SPDX-FileCopyrightText: 2026 Nirapod Contributors
+#
+# Kconfig options for nirapod-bip39.
+
+menu "nirapod-bip39"
+
+config NIRAPOD_BIP39
+    bool "Enable nirapod-bip39"
+    default y
+
+config NIRAPOD_BIP39_BACKEND_5BIT
+    bool "Use the 5-bit packed backend"
+    depends on NIRAPOD_BIP39
+    default y
+
+config NIRAPOD_BIP39_BACKEND_TRIE
+    bool "Use the packed radix trie backend"
+    depends on NIRAPOD_BIP39
+    default n
+
+config NIRAPOD_BIP39_BACKEND_DAWG
+    bool "Use the DAWG backend"
+    depends on NIRAPOD_BIP39
+    default n
+
+endmenu

@@ -1,0 +1,14 @@
+{
+  "name": "@nirapod/bip39-core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Flash-first BIP39 English wordlist storage library for embedded targets.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "codegen": "bun run --cwd ../tools codegen",
+    "configure:host": "cmake -S . -B ../../build/packages/core",
+    "build:host": "cmake -S . -B ../../build/packages/core && cmake --build ../../build/packages/core",
+    "test:host": "ctest --test-dir ../../build/packages/core --output-on-failure",
+    "docs:doxygen": "bun run --cwd ../tools docs:doxygen"
+  }
+}

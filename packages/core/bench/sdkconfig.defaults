@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: APACHE-2.0
+# SPDX-FileCopyrightText: 2026 Nirapod Contributors
+
+CONFIG_COMPILER_OPTIMIZATION_SIZE=y
