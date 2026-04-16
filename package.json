@@ -1,0 +1,29 @@
+{
+  "name": "@nirapod/bip39-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Workspace for the nirapod-bip39 core library, tooling, and documentation site.",
+  "license": "Apache-2.0",
+  "author": "Nirapod Contributors",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "codegen": "bun run --cwd packages/tools codegen",
+    "codegen:check": "bun run --cwd packages/tools codegen:check",
+    "build:host": "cmake -S packages/core -B build/packages/core && cmake --build build/packages/core && ln -sfn build/packages/core/compile_commands.json compile_commands.json",
+    "test:host": "ctest --test-dir build/packages/core --output-on-failure",
+    "docs:doxygen": "bun run --cwd packages/tools docs:doxygen",
+    "docs:generate": "bun run docs:doxygen",
+    "docs:dev": "bun run docs:doxygen",
+    "docs:build": "bun run docs:doxygen",
+    "docs": "bun run docs:doxygen",
+    "verify": "bun run codegen:check && bun run --cwd packages/tools src/checks/check_idf_component.ts && bun run build:host && bun run test:host && bun run docs:doxygen",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.0.0"
+  }
+}

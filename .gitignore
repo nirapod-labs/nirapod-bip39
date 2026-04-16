@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: APACHE-2.0
+# SPDX-FileCopyrightText: 2026 Nirapod Contributors
+
+/build/
+/packages/core/doxygen-docs/
+/apps/docs/.next/
+/apps/docs/.source/
+/node_modules/
+compile_commands.json
+/.DS_Store
+
+/.cache/
+/.claude/
+.DS_Store
