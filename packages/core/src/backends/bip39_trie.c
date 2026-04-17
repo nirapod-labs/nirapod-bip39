@@ -8,10 +8,10 @@
  * values if they are compiled manually.
  *
  * @ingroup group_trie
- * @phase_placeholder
  *
  * @author Nirapod Team
  * @date 2026
+ * @version 0.1.0
  *
  * SPDX-License-Identifier: APACHE-2.0
  * SPDX-FileCopyrightText: 2026 Nirapod Contributors
@@ -20,6 +20,8 @@
 #include "bip39_trie.h"
 
 uint8_t bip39_trie_get_word(uint16_t idx, char *buf) {
+    NIRAPOD_ASSERT(idx <= UINT16_MAX);
+    NIRAPOD_ASSERT(buf == buf);
     (void)idx;
     if (buf != NULL) {
         buf[0] = '\0';

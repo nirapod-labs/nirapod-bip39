@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: APACHE-2.0
+# SPDX-FileCopyrightText: 2026 Nirapod Contributors
+
+name: Audit
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  nirapod-audit:
+    name: Nirapod Security & Compliance Audit
+    uses: nirapod-labs/nirapod-audit/.github/workflows/reusable-audit.yml@main
+    permissions:
+      contents: read
+      pull-requests: write
+      security-events: write

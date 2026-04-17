@@ -1,7 +1,14 @@
+##
+# @file Doxyfile
+# @brief Doxygen configuration for nirapod-bip39.
+#
+# @details
+# Configures the build system to generate HTML and XML documentation from
+# the repository's C/C++ headers and markdown files. MathJax is enabled.
+#
 # SPDX-License-Identifier: APACHE-2.0
 # SPDX-FileCopyrightText: 2026 Nirapod Contributors
-#
-# Doxygen configuration for nirapod-bip39.
+##
 
 PROJECT_NAME           = "nirapod-bip39"
 PROJECT_NUMBER         = "0.1.0"

@@ -1,0 +1,151 @@
+{
+  "version": 2,
+  "configHash": "9322415eeb7a801f",
+  "ruleCount": 72,
+  "files": {
+    "packages/core/bench/main/bench_main.c": {
+      "hash": "cf3f8f16c49cfbd105da4a94f847413ada5962109fdccb4912d47e32595badf0",
+      "mtimeMs": 1776402151486.8933,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:21.987Z"
+    },
+    "packages/core/include/bip39/bip39.h": {
+      "hash": "395915a1fbc749b770f89f6fbf194c92f46be4175d1a9239cc2139d6d4d482ac",
+      "mtimeMs": 1776403090817.6218,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:21.990Z"
+    },
+    "packages/core/include/bip39/bip39_port.h": {
+      "hash": "d81be448192eac5fc5c0f64a47b365738b51b3c458da4d8ab2479613a639520e",
+      "mtimeMs": 1776400465270.6448,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:21.991Z"
+    },
+    "packages/core/include/bip39/bip39_port_esp32.h": {
+      "hash": "75b45740c1f6fc83a72d0706c57bca79549babaa515b16865935e152405b2254",
+      "mtimeMs": 1776403187478.0422,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:21.992Z"
+    },
+    "packages/core/include/bip39/bip39_port_nrf52.h": {
+      "hash": "7906b3ed530ca6a848fc47a2bca4212c6243c869a83b0cb506b5f29cd1012ad8",
+      "mtimeMs": 1776400189089.801,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:21.992Z"
+    },
+    "packages/core/src/backends/bip39_5bit.c": {
+      "hash": "3492cc9b8e218c26b27dc0055e20f9354f60847e9fa60ebd5305758c5c324ab1",
+      "mtimeMs": 1776401225131.3245,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:21.996Z"
+    },
+    "packages/core/src/backends/bip39_5bit.h": {
+      "hash": "2d2b30483b26cb4eb672c9f0500c4f4eb2ebef5e721a8ebf8826c64a59c82c8c",
+      "mtimeMs": 1776400477636.5046,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:22.000Z"
+    },
+    "packages/core/src/backends/bip39_dawg.c": {
+      "hash": "0e66d6042dce47aeb4a65fcaeb399a093545cce55c01487527687d19d3fb86cb",
+      "mtimeMs": 1776402162224.027,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:22.000Z"
+    },
+    "packages/core/src/backends/bip39_dawg.h": {
+      "hash": "1ba98fbfadbf04bb9719b4ffa522e50a3ddb7e0ab8e8324f563f2363e10eab98",
+      "mtimeMs": 1776402005656.2405,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:22.001Z"
+    },
+    "packages/core/src/backends/bip39_trie.c": {
+      "hash": "ee2a09c6301d220e72404ad019b28dbe9469380f94eddce5aa5330a446b4af8a",
+      "mtimeMs": 1776402161419.339,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:22.002Z"
+    },
+    "packages/core/src/backends/bip39_trie.h": {
+      "hash": "3aa6467a3329f79ffcbb3e2925f269ac14dc574679801ea45330c9c1ed1d7996",
+      "mtimeMs": 1776402017037.576,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:22.002Z"
+    },
+    "packages/core/src/bip39.c": {
+      "hash": "80678b09fac28821007a09a3aff1ec40d44afa7dc0b9105732a4f03f935aa200",
+      "mtimeMs": 1776402182415.2568,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:22.003Z"
+    },
+    "packages/core/test/test_cross_backend.c": {
+      "hash": "ca75d78b3ef38c96c36a11291e0ea758b5e1498f7395851d8675862cbfc31576",
+      "mtimeMs": 1776400682507.5522,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:22.003Z"
+    },
+    "packages/core/test/test_fuzz_host.c": {
+      "hash": "909c9077948a3c1da9186d795c82ee63e5fd93c29efd311deb04c417667bcbb5",
+      "mtimeMs": 1776403047734.9543,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:22.004Z"
+    },
+    "packages/core/test/test_invalid_words.c": {
+      "hash": "cf6d07d7fafc0b1c80debaf4a5905f08277bb8511646e7bbebb0e0e742fb568c",
+      "mtimeMs": 1776402092472.3577,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:22.005Z"
+    },
+    "packages/core/test/test_round_trip.c": {
+      "hash": "7e05ecaff79faa6608f9d093d813c2320d912ff54ab4fa03fc8ac131f5ae4dfc",
+      "mtimeMs": 1776402068581.2627,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-17T07:59:22.007Z"
+    }
+  }
+}

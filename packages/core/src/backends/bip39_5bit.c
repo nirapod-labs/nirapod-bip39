@@ -14,6 +14,7 @@
  *
  * @author Nirapod Team
  * @date 2026
+ * @version 0.1.0
  *
  * SPDX-License-Identifier: APACHE-2.0
  * SPDX-FileCopyrightText: 2026 Nirapod Contributors
@@ -21,8 +22,10 @@
 
 #include "bip39_5bit.h"
 
+#include "bip39/bip39.h"
 #include "bip39/bip39_port.h"
 
+#include <assert.h>
 #include <string.h>
 
 /**
@@ -51,17 +54,23 @@ BIP39_FLASH_ATTR extern const uint8_t bip39_5b_data[];
  * @return Cumulative character count at @p idx.
  */
 static uint16_t bip39_5bit_offset_at(uint16_t idx) {
-    return BIP39_FLASH_READ_U16(&bip39_5b_offsets[idx]);
+  return bip39_flash_read_u16(&bip39_5b_offsets[idx]);
 }
 
 /**
  * @brief Return the generated data byte count derived from the final offset.
  *
+ * @pre The offset table is properly initialized.
+ * @post The return value is the byte count needed for packed storage.
+ *
  * @return Packed data length in bytes.
  */
 static uint16_t bip39_5bit_data_bytes(void) {
-    const uint32_t total_chars = (uint32_t)bip39_5bit_offset_at(BIP39_WORD_COUNT);
-    return (uint16_t)((total_chars * 5U + 7U) / 8U);
+  NIRAPOD_ASSERT(BIP39_WORD_COUNT <= 65535U);
+  NIRAPOD_ASSERT(BIP39_WORD_COUNT <= 8192U);
+  const uint32_t total_chars = (uint32_t)bip39_5bit_offset_at(BIP39_WORD_COUNT);
+  NIRAPOD_ASSERT(total_chars <= 16384U);
+  return (uint16_t)((total_chars * 5U + 7U) / 8U);
 }
 
 /**
@@ -73,18 +82,21 @@ static uint16_t bip39_5bit_data_bytes(void) {
  * @return Decoded symbol in the range `1..26`.
  */
 static BIP39_IRAM_ATTR uint8_t bip39_5bit_get_sym(uint16_t char_idx) {
-    const uint32_t bit_pos = (uint32_t)char_idx * 5U;
-    const uint16_t byte_idx = (uint16_t)(bit_pos / 8U);
-    const uint8_t bit_shift = (uint8_t)(11U - (bit_pos % 8U));
-    const uint16_t data_bytes = bip39_5bit_data_bytes();
-    uint16_t window = 0U;
+  NIRAPOD_ASSERT(char_idx <= 16384U);
+  NIRAPOD_ASSERT(BIP39_WORD_COUNT > 0U);
+  const uint32_t bit_pos = (uint32_t)char_idx * 5U;
+  const uint16_t byte_idx = (uint16_t)(bit_pos / 8U);
+  const uint8_t bit_shift = (uint8_t)(11U - (bit_pos % 8U));
+  const uint16_t data_bytes = bip39_5bit_data_bytes();
+  uint16_t window = 0U;
 
-    window = (uint16_t)((uint16_t)BIP39_FLASH_READ_BYTE(&bip39_5b_data[byte_idx]) << 8U);
-    if ((uint16_t)(byte_idx + 1U) < data_bytes) {
-        window |= (uint16_t)BIP39_FLASH_READ_BYTE(&bip39_5b_data[byte_idx + 1U]);
-    }
+  window = (uint16_t)((uint16_t)bip39_flash_read_byte(&bip39_5b_data[byte_idx])
+                      << 8U);
+  if ((uint16_t)(byte_idx + 1U) < data_bytes) {
+    window |= (uint16_t)bip39_flash_read_byte(&bip39_5b_data[byte_idx + 1U]);
+  }
 
-    return (uint8_t)((window >> bit_shift) & 0x1FU);
+  return (uint8_t)((window >> bit_shift) & 0x1FU);
 }
 
 /**
@@ -98,113 +110,119 @@ static BIP39_IRAM_ATTR uint8_t bip39_5bit_get_sym(uint16_t char_idx) {
  * @return `true` when the word is lowercase ASCII and length 3..8.
  */
 static bool bip39_5bit_measure_word(const char *word, uint8_t *out_len) {
-    uint8_t len = 0U;
+  uint8_t len = 0U;
 
-    if ((word == NULL) || (out_len == NULL)) {
-        return false;
-    }
-
-    /* Max iterations: BIP39_MAX_WORD_LEN + 1 (9). */
-    while (len <= BIP39_MAX_WORD_LEN) {
-        const char ch = word[len];
-
-        if (ch == '\0') {
-            if (len < BIP39_MIN_WORD_LEN) {
-                return false;
-            }
-            *out_len = len;
-            return true;
-        }
-
-        if ((ch < 'a') || (ch > 'z')) {
-            return false;
-        }
-
-        ++len;
-    }
-
+  NIRAPOD_ASSERT(word != NULL);
+  NIRAPOD_ASSERT(out_len != NULL);
+  if ((word == NULL) || (out_len == NULL)) {
     return false;
+  }
+
+  /* Max iterations: BIP39_MAX_WORD_LEN + 1 (9). */
+  while (len <= BIP39_MAX_WORD_LEN) {
+    const char ch = word[len];
+
+    if (ch == '\0') {
+      if (len < BIP39_MIN_WORD_LEN) {
+        return false;
+      }
+      *out_len = len;
+      return true;
+    }
+
+    if ((ch < 'a') || (ch > 'z')) {
+      return false;
+    }
+
+    ++len;
+  }
+
+  return false;
 }
 
 uint8_t bip39_5bit_get_word(uint16_t idx, char *buf) {
-    uint16_t start;
-    uint16_t end;
-    uint8_t out_idx = 0U;
+  NIRAPOD_ASSERT(buf != NULL);
+  NIRAPOD_ASSERT(idx < BIP39_WORD_COUNT);
+  uint16_t start;
+  uint16_t end;
+  uint8_t out_idx = 0U;
 
-    if ((buf == NULL) || (idx >= BIP39_WORD_COUNT)) {
-        if (buf != NULL) {
-            buf[0] = '\0';
-        }
-        return 0U;
+  if ((buf == NULL) || (idx >= BIP39_WORD_COUNT)) {
+    if (buf != NULL) {
+      buf[0] = '\0';
+    }
+    return 0U;
+  }
+
+  start = bip39_5bit_offset_at(idx);
+  end = bip39_5bit_offset_at((uint16_t)(idx + 1U));
+
+  /* Max iterations: BIP39_MAX_WORD_LEN (8). */
+  while ((start < end) && (out_idx < BIP39_MAX_WORD_LEN)) {
+    const uint8_t sym = bip39_5bit_get_sym(start);
+
+    if ((sym == 0U) || (sym > 26U)) {
+      buf[0] = '\0';
+      return 0U;
     }
 
-    start = bip39_5bit_offset_at(idx);
-    end = bip39_5bit_offset_at((uint16_t)(idx + 1U));
+    buf[out_idx] = (char)('a' + (char)(sym - 1U));
+    ++out_idx;
+    ++start;
+  }
 
-    /* Max iterations: BIP39_MAX_WORD_LEN (8). */
-    while ((start < end) && (out_idx < BIP39_MAX_WORD_LEN)) {
-        const uint8_t sym = bip39_5bit_get_sym(start);
-
-        if ((sym == 0U) || (sym > 26U)) {
-            buf[0] = '\0';
-            return 0U;
-        }
-
-        buf[out_idx] = (char)('a' + (char)(sym - 1U));
-        ++out_idx;
-        ++start;
-    }
-
-    buf[out_idx] = '\0';
-    return out_idx;
+  buf[out_idx] = '\0';
+  return out_idx;
 }
 
 int16_t bip39_5bit_find_word(const char *word) {
-    uint8_t word_len = 0U;
-    uint16_t low = 0U;
-    uint16_t high = BIP39_WORD_COUNT;
-    uint8_t step = 0U;
-    char candidate[BIP39_MAX_WORD_LEN + 1U];
+  NIRAPOD_ASSERT(word != NULL);
+  NIRAPOD_ASSERT(BIP39_WORD_COUNT > 0U);
+  uint8_t word_len = 0U;
+  uint16_t low = 0U;
+  uint16_t high = BIP39_WORD_COUNT;
+  uint8_t step = 0U;
+  char candidate[BIP39_MAX_WORD_LEN + 1U];
 
-    if (!bip39_5bit_measure_word(word, &word_len)) {
-        return -1;
-    }
-
-    /* Max iterations: ceil(log2(2048)) = 11. A final equality check below
-     * handles the narrowed slot once the search interval collapses. */
-    while ((low < high) && (step < BIP39_5BIT_SEARCH_MAX_STEPS)) {
-        const uint16_t mid = (uint16_t)(low + ((high - low) / 2U));
-        const uint8_t decoded_len = bip39_5bit_get_word(mid, candidate);
-        const int cmp = strcmp(word, candidate);
-
-        if (decoded_len == 0U) {
-            return -1;
-        }
-
-        if ((decoded_len == word_len) && (cmp == 0)) {
-            return (int16_t)mid;
-        }
-
-        if (cmp < 0) {
-            high = mid;
-        } else {
-            low = (uint16_t)(mid + 1U);
-        }
-
-        ++step;
-    }
-
-    if (low < BIP39_WORD_COUNT) {
-        const uint8_t decoded_len = bip39_5bit_get_word(low, candidate);
-
-        if ((decoded_len == word_len) && (strcmp(word, candidate) == 0)) {
-            return (int16_t)low;
-        }
-    }
-
+  if (!bip39_5bit_measure_word(word, &word_len)) {
     return -1;
+  }
+
+  /* Max iterations: ceil(log2(2048)) = 11. A final equality check below
+   * handles the narrowed slot once the search interval collapses. */
+  while ((low < high) && (step < BIP39_5BIT_SEARCH_MAX_STEPS)) {
+    const uint16_t mid = (uint16_t)(low + ((high - low) / 2U));
+    const uint8_t decoded_len = bip39_5bit_get_word(mid, candidate);
+    const int cmp = strcmp(word, candidate);
+
+    if (decoded_len == 0U) {
+      return -1;
+    }
+
+    if ((decoded_len == word_len) && (cmp == 0)) {
+      return (int16_t)mid;
+    }
+
+    if (cmp < 0) {
+      high = mid;
+    } else {
+      low = (uint16_t)(mid + 1U);
+    }
+
+    ++step;
+  }
+
+  if (low < BIP39_WORD_COUNT) {
+    const uint8_t decoded_len = bip39_5bit_get_word(low, candidate);
+
+    if ((decoded_len == word_len) && (strcmp(word, candidate) == 0)) {
+      return (int16_t)low;
+    }
+  }
+
+  return -1;
 }
 
 bool bip39_5bit_is_valid(const char *word) {
-    return bip39_5bit_find_word(word) >= 0;
+  return bip39_5bit_find_word(word) >= 0;
 }

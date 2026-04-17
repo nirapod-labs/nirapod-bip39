@@ -13,9 +13,10 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, join } from 'node:path';
 
-const COMPONENT_PATH = resolve(import.meta.dirname, '../../../core/idf_component.yml');
+const REPO_ROOT = join("..", "..", "..", "..");
+const COMPONENT_PATH = resolve(REPO_ROOT, 'packages/core/idf_component.yml');
 
 function validateManifest() {
   try {

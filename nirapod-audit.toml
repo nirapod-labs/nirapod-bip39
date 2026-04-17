@@ -1,7 +1,2 @@
-ignorePaths = [
-  "**/generated/**",
-  "**/build/**",
-  "**/node_modules/**",
-  "**/.cache/**",
-  "**/.claude/**"
-]
+[ignore]
+paths = ["**/generated/**", "**/build/**", "**/node_modules/**", "**/.cache/**", "**/.claude/**", "**/.cursor/**"]

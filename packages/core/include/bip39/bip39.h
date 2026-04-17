@@ -17,7 +17,13 @@
  *
  * @author Nirapod Team
  * @date 2026
+ * @version 0.1.0
  *
+ * SPDX-License-Identifier: APACHE-2.0
+ * SPDX-FileCopyrightText: 2026 Nirapod Contributors
+ */
+
+/**
  * @defgroup nirapod_bip39_root nirapod-bip39
  * @brief Flash-first BIP39 wordlist storage for embedded targets.
  *
@@ -29,7 +35,7 @@
  * and validate a candidate. A tested usage example is pulled directly from the
  * host verification suite:
  *
- * @snippet test/test_round_trip.c bip39_public_api_example
+ * @snippet packages/core/test/test_round_trip.c bip39_public_api_example
  *
  * @defgroup group_bip39_hal HAL / Platform Abstraction
  * @ingroup nirapod_bip39_root
@@ -54,15 +60,36 @@
  * @defgroup group_bip39_generated Generated Data Arrays
  * @ingroup nirapod_bip39_root
  * @brief Build-time generated read-only data blobs.
- *
- * SPDX-License-Identifier: APACHE-2.0
- * SPDX-FileCopyrightText: 2026 Nirapod Contributors
  */
 
 #pragma once
 
+#include <assert.h>
 #include <stdbool.h>
 #include <stdint.h>
+
+/**
+ * @defgroup group_errors Error Codes and Assertions
+ * @ingroup nirapod_bip39_root
+ * @brief Run-time assertion macro for contract checking across all modules.
+ */
+
+/**
+ * @ingroup group_errors
+ * @brief Assert a run-time contract on embedded and host targets.
+ *
+ * @details
+ * Defaults to the standard C @c assert() so host builds and unit tests catch
+ * violations immediately. Override this macro before including any nirapod-bip39
+ * header to substitute a platform-specific trap, reset, or panic handler.
+ * Never define it as a no-op in production firmware without explicit sign-off.
+ *
+ * @param expr Boolean expression that must hold. Violation triggers abort()
+ *             (or the platform override) when NDEBUG is not defined.
+ */
+#ifndef NIRAPOD_ASSERT
+#  define NIRAPOD_ASSERT(expr) assert(expr)
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -72,19 +99,20 @@ extern "C" {
  * @ingroup group_bip39_api
  * @brief Number of entries in the canonical BIP39 English wordlist.
  */
-#define BIP39_WORD_COUNT 2048U
+enum { BIP39_WORD_COUNT = 2048 };
 
 /**
  * @ingroup group_bip39_api
- * @brief Maximum word length in the BIP39 English list, excluding the terminator.
+ * @brief Maximum word length in the BIP39 English list, excluding the
+ * null terminator.
  */
-#define BIP39_MAX_WORD_LEN 8U
+enum { BIP39_MAX_WORD_LEN = 8 };
 
 /**
  * @ingroup group_bip39_api
  * @brief Minimum word length in the BIP39 English list.
  */
-#define BIP39_MIN_WORD_LEN 3U
+enum { BIP39_MIN_WORD_LEN = 3 };
 
 /**
  * @ingroup group_bip39_api
@@ -107,6 +135,11 @@ extern "C" {
  * @return Word length in bytes on success.
  * @return `0` when `idx` is out of range or `buf` is `NULL`.
  *
+ * @pre `idx` is in the range `0..2047`. Passing an out-of-range value is not
+ *      a programming error. The function returns `0` and clears `buf`.
+ * @post On success, `buf[return_value] == '\0'` and all decoded bytes are
+ *       in the range `'a'..'z'`.
+ *
  * @note The returned words are always lowercase ASCII `a-z`.
  * @see bip39_find_word() for the reverse lookup path.
  */
@@ -127,10 +160,15 @@ uint8_t bip39_get_word(uint16_t idx, char *buf);
  * @timing The current 5-bit backend uses a bounded binary search over 2048
  * entries, so the comparison loop is capped at eleven search steps.
  *
- * @param[in] word Null-terminated lowercase ASCII string to look up. May be `NULL`.
+ * @param[in] word Null-terminated lowercase ASCII string to look up. May be
+ * `NULL`.
  *
  * @return Index `0..2047` when the word exists in the wordlist.
  * @return `-1` when the input is `NULL`, has invalid shape, or is not present.
+ *
+ * @pre `word` points to a null-terminated string, or is `NULL`. The function
+ *      handles `NULL` gracefully and returns `-1`.
+ * @post The return value is either `-1` or a valid index in `0..2047`.
  *
  * @note The comparison is case-sensitive. `"Abandon"` is invalid.
  * @see bip39_get_word() for decoding by index.
@@ -148,9 +186,15 @@ int16_t bip39_find_word(const char *word);
  *
  * @no_heap
  *
- * @param[in] word Null-terminated lowercase ASCII string to validate. May be `NULL`.
+ * @pre `word` points to a null-terminated string, or is `NULL`.
+ * @post The return value is a boolean indicating validity.
+ *
+ * @param[in] word Null-terminated lowercase ASCII string to validate. May be
+ * `NULL`.
  *
  * @return `true` when the word exists in the wordlist, otherwise `false`.
+ *
+ * @see bip39_find_word() for index retrieval.
  */
 bool bip39_is_valid(const char *word);
 

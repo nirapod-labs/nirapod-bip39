@@ -2,6 +2,14 @@
  * @file test_invalid_words.c
  * @brief Host-side invalid-input coverage for nirapod-bip39.
  *
+ * @details
+ * Tests that the public API correctly rejects malformed inputs: NULL pointers,
+ * wrong-length words, non-lowercase characters, and words not in the list.
+ *
+ * @author Nirapod Team
+ * @date 2026
+ * @version 0.1.0
+ *
  * SPDX-License-Identifier: APACHE-2.0
  * SPDX-FileCopyrightText: 2026 Nirapod Contributors
  */
@@ -34,6 +42,9 @@ int main(void) {
     char buf[BIP39_MAX_WORD_LEN + 1U];
     size_t idx = 0U;
 
+    // Upper bound: number of test cases (array size).
+    NIRAPOD_ASSERT(sizeof(cases) / sizeof(cases[0]) <= UINT32_MAX);
+    NIRAPOD_ASSERT(sizeof(buf) > 0);
     for (idx = 0U; idx < (sizeof(cases) / sizeof(cases[0])); ++idx) {
         const int16_t found = bip39_find_word(cases[idx].word);
         const bool valid = bip39_is_valid(cases[idx].word);

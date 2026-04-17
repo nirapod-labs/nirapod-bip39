@@ -7,6 +7,10 @@
  * checks every entry with `index -> word -> index` round trips through the
  * public API.
  *
+ * @author Nirapod Team
+ * @date 2026
+ * @version 0.1.0
+ *
  * SPDX-License-Identifier: APACHE-2.0
  * SPDX-FileCopyrightText: 2026 Nirapod Contributors
  */
@@ -29,6 +33,7 @@
  * @return `0` on success, `1` on failure.
  */
 static int load_wordlist(char words[BIP39_WORD_COUNT][BIP39_MAX_WORD_LEN + 1U]) {
+    NIRAPOD_ASSERT(words != NULL);
     FILE *file = fopen(BIP39_TEST_WORDLIST_PATH, "r");
     uint16_t idx = 0U;
 
@@ -37,10 +42,12 @@ static int load_wordlist(char words[BIP39_WORD_COUNT][BIP39_MAX_WORD_LEN + 1U]) 
         return 1;
     }
 
+    // Upper bound: BIP39_WORD_COUNT (2048) iterations max.
     while (idx < BIP39_WORD_COUNT) {
         char line[32];
         size_t len;
 
+        NIRAPOD_ASSERT(sizeof(line) <= 2147483647); /* INT_MAX */
         if (fgets(line, (int)sizeof(line), file) == NULL) {
             fclose(file);
             fprintf(stderr, "unexpected end of file at index %u\n", (unsigned)idx);
@@ -68,6 +75,9 @@ int main(void) {
     char expected[BIP39_WORD_COUNT][BIP39_MAX_WORD_LEN + 1U];
     char decoded[BIP39_MAX_WORD_LEN + 1U];
     uint16_t idx = 0U;
+
+    NIRAPOD_ASSERT(sizeof(expected) > 0);
+    NIRAPOD_ASSERT(sizeof(decoded) > 0);
 
     if (load_wordlist(expected) != 0) {
         return 1;

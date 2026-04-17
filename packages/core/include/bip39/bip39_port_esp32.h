@@ -13,6 +13,7 @@
  *
  * @author Nirapod Team
  * @date 2026
+ * @version 0.1.0
  *
  * SPDX-License-Identifier: APACHE-2.0
  * SPDX-FileCopyrightText: 2026 Nirapod Contributors
@@ -20,8 +21,14 @@
 
 #pragma once
 
-#include <esp_attr.h>
 #include <stdint.h>
+
+#if __has_include(<esp_attr.h>)
+#include <esp_attr.h>
+#else
+#define IRAM_ATTR
+#define DROM_ATTR
+#endif
 
 /**
  * @ingroup group_bip39_hal
@@ -38,11 +45,21 @@
 /**
  * @ingroup group_bip39_hal
  * @brief Read one byte from flash-backed storage on ESP32.
+ *
+ * @param ptr Flash memory address.
+ * @return Byte value at address.
  */
-#define BIP39_FLASH_READ_BYTE(ptr) (*(const uint8_t *)(ptr))
+static inline uint8_t bip39_flash_read_byte(const volatile void *ptr) {
+  return *(const volatile uint8_t *)ptr;
+}
 
 /**
  * @ingroup group_bip39_hal
  * @brief Read one 16-bit word from flash-backed storage on ESP32.
+ *
+ * @param ptr Flash memory address.
+ * @return 16-bit word value at address.
  */
-#define BIP39_FLASH_READ_U16(ptr) (*(const uint16_t *)(ptr))
+static inline uint16_t bip39_flash_read_u16(const volatile void *ptr) {
+  return *(const volatile uint16_t *)ptr;
+}

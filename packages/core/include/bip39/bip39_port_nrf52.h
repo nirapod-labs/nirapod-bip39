@@ -14,6 +14,7 @@
  *
  * @author Nirapod Team
  * @date 2026
+ * @version 0.1.0
  *
  * SPDX-License-Identifier: APACHE-2.0
  * SPDX-FileCopyrightText: 2026 Nirapod Contributors
@@ -25,24 +26,36 @@
 
 /**
  * @ingroup group_bip39_hal
- * @brief Leave generated data in the normal read-only section on host and nRF52 stubs.
+ * @brief Leave generated data in the normal read-only section on host and nRF52
+ * stubs.
  */
 #define BIP39_FLASH_ATTR
 
 /**
  * @ingroup group_bip39_hal
- * @brief No special IRAM placement is required for the host and nRF52 stub path.
+ * @brief No special IRAM placement is required for the host and nRF52 stub
+ * path.
  */
 #define BIP39_IRAM_ATTR
 
 /**
  * @ingroup group_bip39_hal
  * @brief Read one byte from flash-backed or read-only storage.
+ *
+ * @param ptr Memory address.
+ * @return Byte value at address.
  */
-#define BIP39_FLASH_READ_BYTE(ptr) (*(const uint8_t *)(ptr))
+static inline uint8_t bip39_flash_read_byte(const volatile void *ptr) {
+  return *(const volatile uint8_t *)ptr;
+}
 
 /**
  * @ingroup group_bip39_hal
  * @brief Read one 16-bit word from flash-backed or read-only storage.
+ *
+ * @param ptr Memory address.
+ * @return 16-bit word value at address.
  */
-#define BIP39_FLASH_READ_U16(ptr) (*(const uint16_t *)(ptr))
+static inline uint16_t bip39_flash_read_u16(const volatile void *ptr) {
+  return *(const volatile uint16_t *)ptr;
+}

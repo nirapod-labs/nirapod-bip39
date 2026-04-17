@@ -8,11 +8,13 @@
  * optional hot-path placement, plus helpers for reading bytes and words from
  * flash-backed arrays.
  *
+ * @ingroup group_bip39_hal
  * @hardware The port layer isolates section-placement and flash-read details
  * so backend code can stay pure C and remain testable on the host.
  *
  * @author Nirapod Team
  * @date 2026
+ * @version 0.1.0
  *
  * SPDX-License-Identifier: APACHE-2.0
  * SPDX-FileCopyrightText: 2026 Nirapod Contributors
@@ -20,10 +22,21 @@
 
 #pragma once
 
+#include <stdint.h>
+
 #if defined(BIP39_PLATFORM_ESP32)
 #include "bip39_port_esp32.h"
 #elif defined(BIP39_PLATFORM_NRF52)
 #include "bip39_port_nrf52.h"
 #else
-#error "Define BIP39_PLATFORM_ESP32 or BIP39_PLATFORM_NRF52 before including bip39_port.h."
+#define BIP39_FLASH_ATTR
+#define BIP39_IRAM_ATTR
+
+static inline uint8_t bip39_flash_read_byte(const volatile void *ptr) {
+  return *(const volatile uint8_t *)ptr;
+}
+
+static inline uint16_t bip39_flash_read_u16(const volatile void *ptr) {
+  return *(const volatile uint16_t *)ptr;
+}
 #endif
