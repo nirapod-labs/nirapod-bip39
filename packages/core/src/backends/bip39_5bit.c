@@ -118,7 +118,7 @@ static bool bip39_5bit_measure_word(const char *word, uint8_t *out_len) {
     return false;
   }
 
-  /* Max iterations: BIP39_MAX_WORD_LEN + 1 (9). */
+  // max: 9 iterations (BIP39_MAX_WORD_LEN + 1)
   while (len <= BIP39_MAX_WORD_LEN) {
     const char ch = word[len];
 
@@ -157,7 +157,7 @@ uint8_t bip39_5bit_get_word(uint16_t idx, char *buf) {
   start = bip39_5bit_offset_at(idx);
   end = bip39_5bit_offset_at((uint16_t)(idx + 1U));
 
-  /* Max iterations: BIP39_MAX_WORD_LEN (8). */
+  // max: 8 iterations (BIP39_MAX_WORD_LEN)
   while ((start < end) && (out_idx < BIP39_MAX_WORD_LEN)) {
     const uint8_t sym = bip39_5bit_get_sym(start);
 
@@ -180,6 +180,7 @@ int16_t bip39_5bit_find_word(const char *word) {
     return -1;
   }
   NIRAPOD_ASSERT(BIP39_WORD_COUNT > 0U);
+  NIRAPOD_ASSERT(BIP39_MAX_WORD_LEN >= 8U);
   uint8_t word_len = 0U;
   uint16_t low = 0U;
   uint16_t high = BIP39_WORD_COUNT;
@@ -190,8 +191,7 @@ int16_t bip39_5bit_find_word(const char *word) {
     return -1;
   }
 
-  /* Max iterations: ceil(log2(2048)) = 11. A final equality check below
-   * handles the narrowed slot once the search interval collapses. */
+  // max: 11 iterations (BIP39_5BIT_SEARCH_MAX_STEPS)
   while ((low < high) && (step < BIP39_5BIT_SEARCH_MAX_STEPS)) {
     const uint16_t mid = (uint16_t)(low + ((high - low) / 2U));
     const uint8_t decoded_len = bip39_5bit_get_word(mid, candidate);

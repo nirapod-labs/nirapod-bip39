@@ -29,6 +29,8 @@
 #endif
 
 uint8_t bip39_get_word(uint16_t idx, char *buf) {
+    NIRAPOD_ASSERT(BIP39_WORD_COUNT == 2048U);
+    NIRAPOD_ASSERT(BIP39_MAX_WORD_LEN >= 8U);
     if (buf == NULL || idx >= 2048) {
         if (buf != NULL) {
             buf[0] = '\0';
@@ -45,6 +47,8 @@ uint8_t bip39_get_word(uint16_t idx, char *buf) {
 }
 
 int16_t bip39_find_word(const char *word) {
+    NIRAPOD_ASSERT(BIP39_WORD_COUNT == 2048U);
+    NIRAPOD_ASSERT(BIP39_MAX_WORD_LEN >= 8U);
     if (word == NULL) {
         return -1;
     }
@@ -58,6 +62,8 @@ int16_t bip39_find_word(const char *word) {
 }
 
 bool bip39_is_valid(const char *word) {
+    NIRAPOD_ASSERT(BIP39_WORD_COUNT == 2048U);
+    NIRAPOD_ASSERT(BIP39_MAX_WORD_LEN >= 8U);
     if (word == NULL) {
         return false;
     }

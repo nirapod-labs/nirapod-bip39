@@ -10,7 +10,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:21.987Z"
+      "lastAudit": "2026-04-17T09:24:30.250Z"
     },
     "packages/core/include/bip39/bip39.h": {
       "hash": "395915a1fbc749b770f89f6fbf194c92f46be4175d1a9239cc2139d6d4d482ac",
@@ -19,25 +19,25 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:21.990Z"
+      "lastAudit": "2026-04-17T09:24:30.253Z"
     },
     "packages/core/include/bip39/bip39_port.h": {
-      "hash": "d81be448192eac5fc5c0f64a47b365738b51b3c458da4d8ab2479613a639520e",
-      "mtimeMs": 1776400465270.6448,
+      "hash": "67ce49ec39e9152b65e0e7977a1d460deb1a7b7aa501270801117710c6f5b23e",
+      "mtimeMs": 1776417339393.797,
       "errors": 0,
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:21.991Z"
+      "lastAudit": "2026-04-17T09:24:30.254Z"
     },
     "packages/core/include/bip39/bip39_port_esp32.h": {
-      "hash": "75b45740c1f6fc83a72d0706c57bca79549babaa515b16865935e152405b2254",
-      "mtimeMs": 1776403187478.0422,
+      "hash": "e296791031f7c3e2a65d9a043cfba5737372ad2adde579046d8009730c1bfa98",
+      "mtimeMs": 1776417460246.7317,
       "errors": 0,
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:21.992Z"
+      "lastAudit": "2026-04-17T09:24:30.255Z"
     },
     "packages/core/include/bip39/bip39_port_nrf52.h": {
       "hash": "7906b3ed530ca6a848fc47a2bca4212c6243c869a83b0cb506b5f29cd1012ad8",
@@ -46,16 +46,16 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:21.992Z"
+      "lastAudit": "2026-04-17T09:24:30.256Z"
     },
     "packages/core/src/backends/bip39_5bit.c": {
-      "hash": "3492cc9b8e218c26b27dc0055e20f9354f60847e9fa60ebd5305758c5c324ab1",
-      "mtimeMs": 1776401225131.3245,
+      "hash": "7886e402ab7519d7867c7222adce347c129ede4512010b837fa85cc059944290",
+      "mtimeMs": 1776417635709.3738,
       "errors": 0,
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:21.996Z"
+      "lastAudit": "2026-04-17T09:24:30.259Z"
     },
     "packages/core/src/backends/bip39_5bit.h": {
       "hash": "2d2b30483b26cb4eb672c9f0500c4f4eb2ebef5e721a8ebf8826c64a59c82c8c",
@@ -64,7 +64,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:22.000Z"
+      "lastAudit": "2026-04-17T09:24:30.262Z"
     },
     "packages/core/src/backends/bip39_dawg.c": {
       "hash": "0e66d6042dce47aeb4a65fcaeb399a093545cce55c01487527687d19d3fb86cb",
@@ -73,7 +73,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:22.000Z"
+      "lastAudit": "2026-04-17T09:24:30.262Z"
     },
     "packages/core/src/backends/bip39_dawg.h": {
       "hash": "1ba98fbfadbf04bb9719b4ffa522e50a3ddb7e0ab8e8324f563f2363e10eab98",
@@ -82,7 +82,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:22.001Z"
+      "lastAudit": "2026-04-17T09:24:30.263Z"
     },
     "packages/core/src/backends/bip39_trie.c": {
       "hash": "ee2a09c6301d220e72404ad019b28dbe9469380f94eddce5aa5330a446b4af8a",
@@ -91,7 +91,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:22.002Z"
+      "lastAudit": "2026-04-17T09:24:30.264Z"
     },
     "packages/core/src/backends/bip39_trie.h": {
       "hash": "3aa6467a3329f79ffcbb3e2925f269ac14dc574679801ea45330c9c1ed1d7996",
@@ -100,16 +100,16 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:22.002Z"
+      "lastAudit": "2026-04-17T09:24:30.264Z"
     },
     "packages/core/src/bip39.c": {
-      "hash": "80678b09fac28821007a09a3aff1ec40d44afa7dc0b9105732a4f03f935aa200",
-      "mtimeMs": 1776402182415.2568,
+      "hash": "7942c7775176da3f2c4f3ef9ba39e8fd7830cb7a94253e30c8a463b8bcc5e272",
+      "mtimeMs": 1776417647624.0776,
       "errors": 0,
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:22.003Z"
+      "lastAudit": "2026-04-17T09:24:30.265Z"
     },
     "packages/core/test/test_cross_backend.c": {
       "hash": "ca75d78b3ef38c96c36a11291e0ea758b5e1498f7395851d8675862cbfc31576",
@@ -118,7 +118,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:22.003Z"
+      "lastAudit": "2026-04-17T09:24:30.265Z"
     },
     "packages/core/test/test_fuzz_host.c": {
       "hash": "909c9077948a3c1da9186d795c82ee63e5fd93c29efd311deb04c417667bcbb5",
@@ -127,7 +127,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:22.004Z"
+      "lastAudit": "2026-04-17T09:24:30.266Z"
     },
     "packages/core/test/test_invalid_words.c": {
       "hash": "cf6d07d7fafc0b1c80debaf4a5905f08277bb8511646e7bbebb0e0e742fb568c",
@@ -136,7 +136,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:22.005Z"
+      "lastAudit": "2026-04-17T09:24:30.267Z"
     },
     "packages/core/test/test_round_trip.c": {
       "hash": "7e05ecaff79faa6608f9d093d813c2320d912ff54ab4fa03fc8ac131f5ae4dfc",
@@ -145,7 +145,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T07:59:22.007Z"
+      "lastAudit": "2026-04-17T09:24:30.268Z"
     }
   }
 }
