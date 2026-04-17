@@ -13,10 +13,14 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const REPO_ROOT = join("..", "..", "..", "..");
-const COMPONENT_PATH = resolve(REPO_ROOT, 'packages/core/idf_component.yml');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Resolve from script location (.../packages/tools/src/checks/)
+const COMPONENT_PATH = resolve(__dirname, '../../../../packages/core/idf_component.yml');
 
 function validateManifest() {
   try {

@@ -32,10 +32,20 @@
 #define BIP39_FLASH_ATTR
 #define BIP39_IRAM_ATTR
 
+/**
+ * @brief Read a single byte from flash-mapped memory (Generic).
+ * @param[in] ptr Pointer to the data in flash.
+ * @return Byte at the specified location.
+ */
 static inline uint8_t bip39_flash_read_byte(const volatile void *ptr) {
   return *(const volatile uint8_t *)ptr;
 }
 
+/**
+ * @brief Read an unsigned 16-bit integer from flash-mapped memory (Generic).
+ * @param[in] ptr Pointer to the data in flash.
+ * @return 16-bit value at the specified location.
+ */
 static inline uint16_t bip39_flash_read_u16(const volatile void *ptr) {
   return *(const volatile uint16_t *)ptr;
 }

@@ -24,7 +24,6 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@nirapod-audit/core": "workspace:../nirapod-audit/packages/core",
     "husky": "^9.0.0"
   }
 }
