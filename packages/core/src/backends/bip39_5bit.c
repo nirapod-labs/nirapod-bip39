@@ -176,7 +176,9 @@ uint8_t bip39_5bit_get_word(uint16_t idx, char *buf) {
 }
 
 int16_t bip39_5bit_find_word(const char *word) {
-  NIRAPOD_ASSERT(word != NULL);
+  if (word == NULL) {
+    return -1;
+  }
   NIRAPOD_ASSERT(BIP39_WORD_COUNT > 0U);
   uint8_t word_len = 0U;
   uint16_t low = 0U;

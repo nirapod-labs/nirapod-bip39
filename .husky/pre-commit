@@ -1,16 +1,12 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/husky.sh"
 
+export PATH="$PATH:$HOME/.bun/bin:/usr/local/bin:/opt/homebrew/bin"
+
 echo "[nirapod-bip39] Running pre-commit hooks..."
 
-# 1. Run local codegen checks
-# Note: running using the local node/bun/pnpm environment
-if command -v pnpm >/dev/null 2>&1; then
-  pnpm run codegen:check || exit 1
-  pnpm -C packages/tools run typecheck || exit 1
-else
-  bun run codegen:check || exit 1
-fi
+# 1. Run local verify suite (C build + tests + mapping checks)
+bun run verify || exit 1
 
 # 2. Run nirapod-audit CLI using the global CLI if available
 if command -v nirapod-audit >/dev/null 2>&1; then

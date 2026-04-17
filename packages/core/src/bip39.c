@@ -16,6 +16,7 @@
  */
 
 #include "bip39/bip39.h"
+#include <stddef.h>
 
 #if defined(BIP39_BACKEND_5BIT)
 #include "bip39_5bit.h"
@@ -28,8 +29,12 @@
 #endif
 
 uint8_t bip39_get_word(uint16_t idx, char *buf) {
-    NIRAPOD_ASSERT(idx <= UINT16_MAX);
-    NIRAPOD_ASSERT(buf == buf);
+    if (buf == NULL || idx >= 2048) {
+        if (buf != NULL) {
+            buf[0] = '\0';
+        }
+        return 0U;
+    }
 #if defined(BIP39_BACKEND_5BIT)
     return bip39_5bit_get_word(idx, buf);
 #elif defined(BIP39_BACKEND_TRIE)
@@ -40,8 +45,9 @@ uint8_t bip39_get_word(uint16_t idx, char *buf) {
 }
 
 int16_t bip39_find_word(const char *word) {
-    NIRAPOD_ASSERT(word == word);
-    NIRAPOD_ASSERT(BIP39_WORD_COUNT > 0U);
+    if (word == NULL) {
+        return -1;
+    }
 #if defined(BIP39_BACKEND_5BIT)
     return bip39_5bit_find_word(word);
 #elif defined(BIP39_BACKEND_TRIE)
@@ -52,8 +58,9 @@ int16_t bip39_find_word(const char *word) {
 }
 
 bool bip39_is_valid(const char *word) {
-    NIRAPOD_ASSERT(word == word);
-    NIRAPOD_ASSERT(BIP39_WORD_COUNT > 0U);
+    if (word == NULL) {
+        return false;
+    }
 #if defined(BIP39_BACKEND_5BIT)
     return bip39_5bit_is_valid(word);
 #elif defined(BIP39_BACKEND_TRIE)
