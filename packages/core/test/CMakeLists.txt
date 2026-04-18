@@ -38,3 +38,17 @@ add_executable(
 )
 target_link_libraries(bip39_test_cross_backend PRIVATE nirapod_bip39)
 add_test(NAME bip39_cross_backend_placeholder COMMAND bip39_test_cross_backend)
+
+# TODO: Re-enable when bench engine moved to separate component
+# add_executable(
+#     bip39_test_bench_core
+#     test_bench_core.c
+#     ${CMAKE_SOURCE_DIR}/../bench/src/bench_core.c
+# )
+# target_include_directories(
+#     bip39_test_bench_core
+#     PRIVATE
+#         ${CMAKE_CURRENT_SOURCE_DIR}/../include
+#         ${CMAKE_SOURCE_DIR}/../../bench/include
+# )
+# add_test(NAME bip39_bench_core COMMAND bip39_test_bench_core)

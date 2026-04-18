@@ -1,11 +1,11 @@
 {
   "version": 2,
   "configHash": "9322415eeb7a801f",
-  "ruleCount": 72,
+  "ruleCount": 55,
   "files": {
-    "packages/core/bench/main/bench_main.c": {
-      "hash": "cf3f8f16c49cfbd105da4a94f847413ada5962109fdccb4912d47e32595badf0",
-      "mtimeMs": 1776402151486.8933,
+    "packages/bench/include/bench_port.h": {
+      "hash": "095e2b44751767c6bbfe34ccff247de249817533600db288c1d28d533ff140a2",
+      "mtimeMs": 1776487364723.1448,
       "errors": 0,
       "warnings": 0,
       "infos": 0,

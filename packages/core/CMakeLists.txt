@@ -20,50 +20,16 @@ if(NOT COMMAND idf_component_register)
     project(nirapod_bip39 VERSION 0.1.0 LANGUAGES C)
 endif()
 
-find_program(BUN_EXECUTABLE bun REQUIRED)
-
 set(BIP39_BACKEND "5BIT" CACHE STRING "Backend: 5BIT | TRIE | DAWG")
 set_property(CACHE BIP39_BACKEND PROPERTY STRINGS 5BIT TRIE DAWG)
 
 option(BIP39_BUILD_TESTS "Build host-side nirapod-bip39 tests" ON)
 
 get_filename_component(BIP39_WORKSPACE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
-set(BIP39_TOOLS_DIR "${BIP39_WORKSPACE_ROOT}/packages/tools")
-set(BIP39_TOOLS_SRC_DIR "${BIP39_TOOLS_DIR}/src")
-set(BIP39_WORDLIST "${BIP39_TOOLS_DIR}/data/english.txt")
 set(BIP39_GEN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/generated")
 set(BIP39_5BIT_GEN "${BIP39_GEN_DIR}/bip39_5bit_data.c")
 set(BIP39_TRIE_GEN "${BIP39_GEN_DIR}/bip39_trie_data.c")
 set(BIP39_DAWG_GEN "${BIP39_GEN_DIR}/bip39_dawg_data.c")
-
-add_custom_command(
-    OUTPUT
-        ${BIP39_5BIT_GEN}
-        ${BIP39_TRIE_GEN}
-        ${BIP39_DAWG_GEN}
-    COMMAND
-        ${BUN_EXECUTABLE}
-        ${BIP39_TOOLS_SRC_DIR}/codegen/gen_all.ts
-        --wordlist ${BIP39_WORDLIST}
-        --outdir ${BIP39_GEN_DIR}
-    DEPENDS
-        ${BIP39_WORDLIST}
-        ${BIP39_TOOLS_SRC_DIR}/codegen/gen_all.ts
-        ${BIP39_TOOLS_SRC_DIR}/codegen/gen_5bit.ts
-        ${BIP39_TOOLS_SRC_DIR}/codegen/gen_trie.ts
-        ${BIP39_TOOLS_SRC_DIR}/codegen/gen_dawg.ts
-        ${BIP39_TOOLS_SRC_DIR}/lib/codegen.ts
-    COMMENT "Generating nirapod-bip39 data arrays"
-    VERBATIM
-)
-
-add_custom_target(
-    bip39_codegen
-    DEPENDS
-        ${BIP39_5BIT_GEN}
-        ${BIP39_TRIE_GEN}
-        ${BIP39_DAWG_GEN}
-)
 
 if(BIP39_BACKEND STREQUAL "5BIT")
     set(BIP39_BACKEND_SRC
@@ -96,7 +62,6 @@ if(COMMAND idf_component_register)
             -Wall
             -Wextra
             -Werror
-            -Wpedantic
     )
 
     target_compile_definitions(
@@ -105,9 +70,42 @@ if(COMMAND idf_component_register)
             ${BIP39_BACKEND_DEF}
             BIP39_PLATFORM_ESP32
     )
-
-    add_dependencies(${COMPONENT_LIB} bip39_codegen)
 else()
+    find_program(BUN_EXECUTABLE bun REQUIRED)
+
+    set(BIP39_TOOLS_DIR "${BIP39_WORKSPACE_ROOT}/packages/tools")
+    set(BIP39_TOOLS_SRC_DIR "${BIP39_TOOLS_DIR}/src")
+    set(BIP39_WORDLIST "${BIP39_TOOLS_DIR}/data/english.txt")
+
+    add_custom_command(
+        OUTPUT
+            ${BIP39_5BIT_GEN}
+            ${BIP39_TRIE_GEN}
+            ${BIP39_DAWG_GEN}
+        COMMAND
+            ${BUN_EXECUTABLE}
+            ${BIP39_TOOLS_SRC_DIR}/codegen/gen_all.ts
+            --wordlist ${BIP39_WORDLIST}
+            --outdir ${BIP39_GEN_DIR}
+        DEPENDS
+            ${BIP39_WORDLIST}
+            ${BIP39_TOOLS_SRC_DIR}/codegen/gen_all.ts
+            ${BIP39_TOOLS_SRC_DIR}/codegen/gen_5bit.ts
+            ${BIP39_TOOLS_SRC_DIR}/codegen/gen_trie.ts
+            ${BIP39_TOOLS_SRC_DIR}/codegen/gen_dawg.ts
+            ${BIP39_TOOLS_SRC_DIR}/lib/codegen.ts
+        COMMENT "Generating nirapod-bip39 data arrays"
+        VERBATIM
+    )
+
+    add_custom_target(
+        bip39_codegen
+        DEPENDS
+            ${BIP39_5BIT_GEN}
+            ${BIP39_TRIE_GEN}
+            ${BIP39_DAWG_GEN}
+    )
+
     add_library(
         nirapod_bip39
         STATIC

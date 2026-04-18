@@ -1,5 +1,5 @@
 {
-  "name": "@nirapod/bip39-tools",
+  "name": "@nirapod-bip39/tools",
   "version": "0.1.0",
   "private": true,
   "description": "Bun-based workspace tooling for nirapod-bip39.",
