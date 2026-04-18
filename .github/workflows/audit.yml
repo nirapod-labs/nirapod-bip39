@@ -13,7 +13,7 @@ on:
 jobs:
   nirapod-audit:
     name: Nirapod Security & Compliance Audit
-    uses: nirapod-labs/nirapod-audit/.github/workflows/reusable-audit.yml@24f6427ef1c7e46a206aea4cbcc900dad6595316
+    uses: nirapod-labs/nirapod-audit/.github/workflows/reusable-audit.yml@26ba32941792a4aab9cfc04c717f65ad868857b4
     permissions:
       contents: read
       issues: write
