@@ -70,6 +70,7 @@ jobs:
       - name: Upload to ESP-IDF Component Registry
         uses: espressif/upload-components-ci-action@v1
         with:
+          name: nirapod-bip39
           directories: packages/core
           namespace: nirapod
           api_token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}
