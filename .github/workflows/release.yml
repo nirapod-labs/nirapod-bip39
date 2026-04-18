@@ -32,6 +32,17 @@ jobs:
       - name: Verify tagged release
         run: bun run verify
 
+      - name: Verify component version
+        run: |
+          TAG_VERSION=${GITHUB_REF_NAME#v}
+          MANIFEST_VERSION=$(grep '^version:' packages/core/idf_component.yml | awk '{print $2}' | tr -d '"')
+          echo "Tag version: $TAG_VERSION"
+          echo "Manifest version: $MANIFEST_VERSION"
+          if [ "$TAG_VERSION" != "$MANIFEST_VERSION" ]; then
+            echo "::error::Tag version ($TAG_VERSION) does not match manifest version ($MANIFEST_VERSION) in packages/core/idf_component.yml"
+            exit 1
+          fi
+
       - name: Read release metadata
         id: meta
         run: |
@@ -72,4 +83,5 @@ jobs:
         with:
           components: "nirapod-bip39:packages/core"
           namespace: nirapod
+          version: ${{ github.ref_name }}
           api_token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}
