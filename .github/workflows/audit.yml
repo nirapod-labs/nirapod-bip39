@@ -7,13 +7,19 @@ on:
   push:
     branches:
       - main
+      - release/**
   pull_request:
 
 jobs:
   nirapod-audit:
     name: Nirapod Security & Compliance Audit
-    uses: nirapod-labs/nirapod-audit/.github/workflows/reusable-audit.yml@main
+    uses: nirapod-labs/nirapod-audit/.github/workflows/reusable-audit.yml@45f77b7f90185158f5d35e58f1ee186dc6ecefdf
     permissions:
       contents: read
+      issues: write
       pull-requests: write
       security-events: write
+      statuses: write
+    with:
+      working_directory: packages/core
+      tool_ref: 45f77b7f90185158f5d35e58f1ee186dc6ecefdf
