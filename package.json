@@ -1,5 +1,5 @@
 {
-  "name": "@nirapod/bip39-workspace",
+  "name": "@nirapod-bip39/workspace",
   "version": "0.1.0",
   "private": true,
   "description": "Workspace for the nirapod-bip39 core library, tooling, and documentation site.",

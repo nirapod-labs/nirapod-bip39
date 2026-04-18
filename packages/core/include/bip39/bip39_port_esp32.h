@@ -25,6 +25,9 @@
 
 #if __has_include(<esp_attr.h>)
 #include <esp_attr.h>
+#ifndef DROM_ATTR
+#define DROM_ATTR
+#endif
 #else
 /**
  * @brief Fallback for IRAM_ATTR when esp_attr.h is missing (e.g. host-side clangd).

@@ -1,16 +1,101 @@
 {
   "version": 2,
   "configHash": "9322415eeb7a801f",
-  "ruleCount": 72,
+  "ruleCount": 55,
   "files": {
-    "packages/core/bench/main/bench_main.c": {
-      "hash": "cf3f8f16c49cfbd105da4a94f847413ada5962109fdccb4912d47e32595badf0",
-      "mtimeMs": 1776402151486.8933,
+    "packages/bench/include/bench_port.h": {
+      "hash": "095e2b44751767c6bbfe34ccff247de249817533600db288c1d28d533ff140a2",
+      "mtimeMs": 1776487364723.1448,
       "errors": 0,
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.250Z"
+      "lastAudit": "2026-04-18T05:00:27.155Z"
+    },
+    "packages/bench/include/bip39_bench_internal.h": {
+      "hash": "5e7a07e8a79b33c12b051b385cda7babf76db5a36874d9ce72e6fbdf554e20cc",
+      "mtimeMs": 1776487181447.7205,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-18T05:00:27.159Z"
+    },
+    "packages/bench/include/bip39_bench_runner.h": {
+      "hash": "606fb66a46f51e34b75e4afbfa01722e12491fe00d56bd2db4f334cb77ac7504",
+      "mtimeMs": 1776485165323.5889,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-18T05:00:27.161Z"
+    },
+    "packages/bench/port/esp32/app_main.c": {
+      "hash": "eef4d1156739548c1394f112f5fe413875c2dbea394e6df44bf3aaeaf3639a06",
+      "mtimeMs": 1776488294819.9587,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-18T05:00:27.161Z"
+    },
+    "packages/bench/port/esp32/bench_port_esp32.c": {
+      "hash": "fc1e9a30b0adeb09b63ac54a72bbdcfde80dcb1e6e86b38415f1e2bb205f34ca",
+      "mtimeMs": 1776488314522.0398,
+      "errors": 0,
+      "warnings": 1,
+      "infos": 0,
+      "ruleHits": {
+        "NRP-MEM-004": 1
+      },
+      "lastAudit": "2026-04-18T05:00:27.168Z"
+    },
+    "packages/bench/port/nrf52/bench_port_nrf52.c": {
+      "hash": "3a511b4b8d070073338e987d3c06ca63c77481df0ae244078312d92572350726",
+      "mtimeMs": 1776487306875.95,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-18T05:00:27.170Z"
+    },
+    "packages/bench/port/nrf52/main.c": {
+      "hash": "5678ce850b8fabcc7c8ea532cfe2a45af52acc5e247facfe48843ac03f1d8eb9",
+      "mtimeMs": 1776485329242.9973,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-18T05:00:27.170Z"
+    },
+    "packages/bench/src/bench_core.c": {
+      "hash": "e7e84c2739b8f8a2533b6510677b7f67429c295d643b5e05a63cffb0a028a0e5",
+      "mtimeMs": 1776488357210.834,
+      "errors": 0,
+      "warnings": 3,
+      "infos": 0,
+      "ruleHits": {
+        "NRP-MEM-004": 3
+      },
+      "lastAudit": "2026-04-18T05:00:27.175Z"
+    },
+    "packages/bench/src/bench_emit.c": {
+      "hash": "f6b5cf0e9b2e528c27ef2e0abbf1dab02c8592aebd22aed9dc420119ff07c5da",
+      "mtimeMs": 1776487202707.4922,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-18T05:00:27.177Z"
+    },
+    "packages/bench/src/bench_runner.c": {
+      "hash": "80d9c2f0d0f24e5635c292dbc2575f4ea6aeb369a891da633c01b00e45755a71",
+      "mtimeMs": 1776488357250.831,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "ruleHits": {},
+      "lastAudit": "2026-04-18T05:00:27.191Z"
     },
     "packages/core/include/bip39/bip39.h": {
       "hash": "395915a1fbc749b770f89f6fbf194c92f46be4175d1a9239cc2139d6d4d482ac",
@@ -19,7 +104,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.253Z"
+      "lastAudit": "2026-04-18T05:00:27.193Z"
     },
     "packages/core/include/bip39/bip39_port.h": {
       "hash": "67ce49ec39e9152b65e0e7977a1d460deb1a7b7aa501270801117710c6f5b23e",
@@ -28,16 +113,16 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.254Z"
+      "lastAudit": "2026-04-18T05:00:27.194Z"
     },
     "packages/core/include/bip39/bip39_port_esp32.h": {
-      "hash": "e296791031f7c3e2a65d9a043cfba5737372ad2adde579046d8009730c1bfa98",
-      "mtimeMs": 1776417460246.7317,
+      "hash": "34c5908bc17046eccc097b3428ba07d2464ed93cc1f282f94ce8d0a24b21f286",
+      "mtimeMs": 1776488413590.7942,
       "errors": 0,
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.255Z"
+      "lastAudit": "2026-04-18T05:00:27.194Z"
     },
     "packages/core/include/bip39/bip39_port_nrf52.h": {
       "hash": "7906b3ed530ca6a848fc47a2bca4212c6243c869a83b0cb506b5f29cd1012ad8",
@@ -46,7 +131,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.256Z"
+      "lastAudit": "2026-04-18T05:00:27.195Z"
     },
     "packages/core/src/backends/bip39_5bit.c": {
       "hash": "7886e402ab7519d7867c7222adce347c129ede4512010b837fa85cc059944290",
@@ -55,7 +140,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.259Z"
+      "lastAudit": "2026-04-18T05:00:27.198Z"
     },
     "packages/core/src/backends/bip39_5bit.h": {
       "hash": "2d2b30483b26cb4eb672c9f0500c4f4eb2ebef5e721a8ebf8826c64a59c82c8c",
@@ -64,7 +149,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.262Z"
+      "lastAudit": "2026-04-18T05:00:27.199Z"
     },
     "packages/core/src/backends/bip39_dawg.c": {
       "hash": "0e66d6042dce47aeb4a65fcaeb399a093545cce55c01487527687d19d3fb86cb",
@@ -73,7 +158,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.262Z"
+      "lastAudit": "2026-04-18T05:00:27.199Z"
     },
     "packages/core/src/backends/bip39_dawg.h": {
       "hash": "1ba98fbfadbf04bb9719b4ffa522e50a3ddb7e0ab8e8324f563f2363e10eab98",
@@ -82,7 +167,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.263Z"
+      "lastAudit": "2026-04-18T05:00:27.200Z"
     },
     "packages/core/src/backends/bip39_trie.c": {
       "hash": "ee2a09c6301d220e72404ad019b28dbe9469380f94eddce5aa5330a446b4af8a",
@@ -91,7 +176,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.264Z"
+      "lastAudit": "2026-04-18T05:00:27.201Z"
     },
     "packages/core/src/backends/bip39_trie.h": {
       "hash": "3aa6467a3329f79ffcbb3e2925f269ac14dc574679801ea45330c9c1ed1d7996",
@@ -100,7 +185,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.264Z"
+      "lastAudit": "2026-04-18T05:00:27.201Z"
     },
     "packages/core/src/bip39.c": {
       "hash": "7942c7775176da3f2c4f3ef9ba39e8fd7830cb7a94253e30c8a463b8bcc5e272",
@@ -109,7 +194,18 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.265Z"
+      "lastAudit": "2026-04-18T05:00:27.202Z"
+    },
+    "packages/core/test/test_bench_core.c": {
+      "hash": "0f65cf3c47c8b15dd2a1ad38d6afa4be4f2a1fec279dc610dfa847984499cdd1",
+      "mtimeMs": 1776488118508.4795,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 0,
+      "ruleHits": {
+        "NRP-MEM-004": 2
+      },
+      "lastAudit": "2026-04-18T05:00:27.205Z"
     },
     "packages/core/test/test_cross_backend.c": {
       "hash": "ca75d78b3ef38c96c36a11291e0ea758b5e1498f7395851d8675862cbfc31576",
@@ -118,7 +214,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.265Z"
+      "lastAudit": "2026-04-18T05:00:27.205Z"
     },
     "packages/core/test/test_fuzz_host.c": {
       "hash": "909c9077948a3c1da9186d795c82ee63e5fd93c29efd311deb04c417667bcbb5",
@@ -127,7 +223,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.266Z"
+      "lastAudit": "2026-04-18T05:00:27.206Z"
     },
     "packages/core/test/test_invalid_words.c": {
       "hash": "cf6d07d7fafc0b1c80debaf4a5905f08277bb8511646e7bbebb0e0e742fb568c",
@@ -136,7 +232,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.267Z"
+      "lastAudit": "2026-04-18T05:00:27.207Z"
     },
     "packages/core/test/test_round_trip.c": {
       "hash": "7e05ecaff79faa6608f9d093d813c2320d912ff54ab4fa03fc8ac131f5ae4dfc",
@@ -145,7 +241,7 @@
       "warnings": 0,
       "infos": 0,
       "ruleHits": {},
-      "lastAudit": "2026-04-17T09:24:30.268Z"
+      "lastAudit": "2026-04-18T05:00:27.209Z"
     }
   }
 }
