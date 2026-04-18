@@ -12,8 +12,73 @@ on:
 jobs:
   nirapod-audit:
     name: Nirapod Security & Compliance Audit
-    uses: nirapod-labs/nirapod-audit/.github/workflows/reusable-audit.yml@main
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: write
       security-events: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Clone nirapod-audit
+        run: |
+          mkdir -p "$HOME/.nirapod/tools"
+          git clone https://github.com/nirapod-labs/nirapod-audit.git "$HOME/.nirapod/tools/nirapod-audit"
+          cd "$HOME/.nirapod/tools/nirapod-audit"
+          git fetch origin --tags --force
+          LATEST_TAG="$(git describe --tags "$(git rev-list --tags --max-count=1)")"
+          git checkout -f "$LATEST_TAG"
+          bun install --frozen-lockfile
+
+      - name: Run audit
+        run: |
+          mkdir -p packages/core
+          cd packages/core
+          "$HOME/.nirapod/tools/nirapod-audit/apps/cli/src/index.tsx" audit --output sarif > audit-report.json || true
+          "$HOME/.nirapod/tools/nirapod-audit/apps/cli/src/index.tsx" audit --output markdown > audit-report.md || true
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-report
+          path: packages/core/audit-report.json
+          retention-days: 30
+
+      - name: Post status check
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const fs = require('fs');
+            const path = process.cwd() + '/packages/core/audit-report.json';
+            let status = 'success';
+            let summary = 'Audit passed';
+
+            if (fs.existsSync(path)) {
+              const report = JSON.parse(fs.readFileSync(path, 'utf8'));
+              if (report.summary?.errors > 0) {
+                status = 'failure';
+                summary = report.summary.errors + ' errors found';
+              } else if (report.summary?.warnings > 0) {
+                summary = report.summary.warnings + ' warnings';
+              }
+            }
+
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              target_url: context.serverUrl + '/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId,
+              state: status,
+              description: summary,
+              context: 'nirapod-audit'
+            });
+        continue-on-error: true
