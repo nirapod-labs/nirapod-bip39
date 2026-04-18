@@ -1,4 +1,4 @@
-name: nirapod_bip39
+name: nirapod-bip39
 version: "0.1.0"
 description: "Flash-first BIP39 English wordlist storage library for embedded targets."
 url: "https://github.com/nirapod/nirapod-bip39"
